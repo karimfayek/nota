@@ -16,9 +16,7 @@ services:
       DB_PASSWORD: Gtybn!gt%025Trza
     networks:
       - app_network
-    depends_on:
-      - db
-
+   
   web:
     image: nginx:alpine
     container_name: nginx_server
