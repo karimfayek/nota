@@ -16,7 +16,9 @@ jobs:
         run: |
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-
+          # التحقق من صلاحية المفتاح
+          cat ~/.ssh/id_rsa
+          
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@master
         with:
