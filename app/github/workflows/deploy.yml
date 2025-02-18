@@ -18,7 +18,12 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           # التحقق من صلاحية المفتاح
           cat ~/.ssh/id_rsa
-          
+      - name: Ensure default.conf is a file
+        run: |
+          rm -rf nginx/default.conf
+          touch nginx/default.conf
+          echo "server { listen 80; index index.php index.html; root /var/www/public; }" > nginx/default.conf
+          ls -l nginx/
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@v1.2.0
         with:
