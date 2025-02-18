@@ -1,0 +1,7 @@
+.swiper-horizontal > .swiper-pagination-progressbar, .swiper-pagination-progressbar.swiper-pagination-horizontal {
+    bottom: 0;
+    top : auto
+}
+.swiper-wrapper {
+    margin-bottom: 20px; /* Adds space between slides and progress bar */
+  }
