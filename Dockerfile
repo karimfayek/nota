@@ -25,6 +25,8 @@ COPY . .
 # تثبيت الحزم
 RUN composer install --no-dev --optimize-autoloader
 
+RUN npm install
+
 # ضبط صلاحيات التخزين
 RUN chmod -R 777 storage bootstrap/cache
 
