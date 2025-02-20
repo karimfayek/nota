@@ -9,9 +9,9 @@ services:
     restart: always
     working_dir: /var/www
     environment:
-      APP_ENV: production
-      DB_HOST: database-1.cjs8m606i289.us-east-1.rds.amazonaws.com
-      DB_DATABASE: database-1
+      APP_ENV: local
+      DB_HOST: ec2-44-212-0-74.compute-1.amazonaws.com
+      DB_DATABASE: database-1.cjs8m606i289.us-east-1.rds.amazonaws.com
       DB_USERNAME: nota
       DB_PASSWORD: Gtybn!gt%025Trza
     networks:
