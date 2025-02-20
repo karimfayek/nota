@@ -29,7 +29,7 @@ COPY . .
 
 # تثبيت الحزم
 RUN composer install --no-dev --optimize-autoloader
-
+RUN php artisan key:generate
 RUN npm install && npm run build
 
 # ضبط صلاحيات التخزين
