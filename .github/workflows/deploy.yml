@@ -23,12 +23,17 @@ jobs:
           script: |
             # Navigate to the app directory
             cd app
-            git pull origin main
-            sudo touch /var/www/.env
-            sudo chmod 644 /var/www/.env
+            git fetch --all
+            git reset --hard origin/main
+            # Remove incorrect .env directory if it exists
+            if [ -d "/var/www/.env" ]; then
+              rm -rf /var/www/.env
+            fi
+            touch /var/www/.env
+            chmod 644 /var/www/.env
             # Create the .env file
             cat <<EOF > /var/www/.env
-            APP_ENV=local
+            APP_ENV=production
             DB_CONNECTION=mysql
             DB_HOST=${{ secrets.DB_HOST }}
             DB_PORT=3306
@@ -38,7 +43,7 @@ jobs:
             EOF
 
             # Ensure correct permissions
-            sudo chmod 644 /var/www/.env
+            chmod 644 /var/www/.env
 
             # Pull latest code
             git pull origin main
@@ -54,7 +59,7 @@ jobs:
         run: sudo chmod -R 777 /var/www
       - name: Create .env file
         run: |
-          echo "APP_ENV=local" | sudo tee /var/www/.env > /dev/null
+          echo "APP_ENV=production" | sudo tee /var/www/.env > /dev/null
           echo "DB_CONNECTION=mysql" | sudo tee -a /var/www/.env > /dev/null
           echo "DB_HOST=${{ secrets.DB_HOST }}" | sudo tee -a /var/www/.env > /dev/null
           echo "DB_PORT=3306" | sudo tee -a /var/www/.env > /dev/null
