@@ -36,3 +36,5 @@ jobs:
           echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> /var/www/.env
           echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> /var/www/.env
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> /var/www/.env
+          sudo mv /tmp/.env /var/www/.env  # Move to correct location
+          sudo chmod 644 /var/www/.env  # Set correct permissions
