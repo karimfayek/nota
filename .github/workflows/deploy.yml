@@ -52,6 +52,7 @@ jobs:
             docker-compose -f docker-compose.prod.yml up -d --build
 
             # Clear and cache Laravel config
+            docker exec laravel_app php artisan key:generate
             docker exec laravel_app php artisan config:clear
             docker exec laravel_app php artisan config:cache
       - name: Fix permissions for .env file
