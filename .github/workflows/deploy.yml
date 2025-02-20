@@ -28,7 +28,8 @@ jobs:
             if [ -d "/var/www/.env" ]; then
               rm -rf /var/www/.env
             fi
-
+            touch /var/www/.env
+            chmod 644 /var/www/.env
             # Create the .env file
             cat <<EOF > /var/www/.env
             APP_ENV=production
