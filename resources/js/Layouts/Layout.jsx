@@ -2,8 +2,8 @@
 import React, { useEffect } from 'react';
 
 import { usePage } from '@inertiajs/react';
-import Navbar from '../Components/Navbar';
-import Footer from '../Components/Footer';
+import Navbar from '@/Components/Navbar';
+import Footer from '@/Components/Footer';
 import { useDispatch } from 'react-redux';
 import { setTranslations } from '@/slices/translationsSlice';
 import Toaste from '@/common/Toaste';
