@@ -158,16 +158,6 @@ Route::get('/sitemap', function () {
         );
     }
 
-    // Add all blog posts to the sitemap
-    $blogPosts = Blog::all(); // Fetch all blog posts
-    foreach ($blogPosts as $post) {
-        $lastModified = $post->updated_at ?? $post->created_at; 
-        $sitemap->add(
-            Url::create('/blogpost/' . $post->slug) // Assuming 'slug' is used for URLs
-                ->setLastModificationDate($lastModified)
-                ->setPriority(0.6)
-        );
-    }
 
     // Return the sitemap
     return $sitemap->toResponse(request());
