@@ -27,14 +27,14 @@ jobs:
             git pull origin main
             docker-compose -f docker-compose.prod.yml down
             docker-compose -f docker-compose.prod.yml up -d --build
+      - name: Fix permissions for .env file
+         run: sudo chmod -R 777 /var/www
       - name: Create .env file
         run: |
-          echo "APP_ENV=production" > /var/www/.env
-          echo "DB_CONNECTION=mysql" >> /var/www/.env
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> /var/www/.env
-          echo "DB_PORT=3306" >> /var/www/.env
-          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> /var/www/.env
-          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> /var/www/.env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> /var/www/.env
-          sudo mv /tmp/.env /var/www/.env  # Move to correct location
-          sudo chmod 644 /var/www/.env  # Set correct permissions
+          echo "APP_ENV=production" | sudo tee /var/www/.env > /dev/null
+          echo "DB_CONNECTION=mysql" | sudo tee -a /var/www/.env > /dev/null
+          echo "DB_HOST=${{ secrets.DB_HOST }}" | sudo tee -a /var/www/.env > /dev/null
+          echo "DB_PORT=3306" | sudo tee -a /var/www/.env > /dev/null
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" | sudo tee -a /var/www/.env > /dev/null
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" | sudo tee -a /var/www/.env > /dev/null
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" | sudo tee -a /var/www/.env > /dev/null
