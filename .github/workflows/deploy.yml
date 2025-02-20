@@ -21,10 +21,14 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # Navigate to the app directory
-            cd app
-            git fetch --all
-            git reset --hard origin/main
+            cd app            
+            if [ ! -d ".git" ]; then
+              echo "Error: Not a git repository. Cloning again..."
+              cd ..
+              rm -rf app
+              git clone https://github.com/karimfayek/nota.git app
+              cd app
+            fi
             # Remove incorrect .env directory if it exists
             if [ -d "/var/www/.env" ]; then
               rm -rf /var/www/.env
