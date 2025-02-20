@@ -23,8 +23,8 @@ jobs:
           script: |
             # Navigate to the app directory
             cd app
-            touch /var/www/.env
-            chmod 644 /var/www/.env
+            sudo touch /var/www/.env
+            sudo chmod 644 /var/www/.env
             # Create the .env file
             cat <<EOF > /var/www/.env
             APP_ENV=local
@@ -37,7 +37,7 @@ jobs:
             EOF
 
             # Ensure correct permissions
-            chmod 644 /var/www/.env
+            sudo chmod 644 /var/www/.env
 
             # Pull latest code
             git pull origin main
