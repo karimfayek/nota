@@ -12,7 +12,12 @@ RUN apt-get update && apt-get install -y \
     curl \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql
+# Install Node.js and npm
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
 
+# Verify installation
+RUN node -v && npm -v
 # تثبيت Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -25,7 +30,7 @@ COPY . .
 # تثبيت الحزم
 RUN composer install --no-dev --optimize-autoloader
 
-RUN npm install
+RUN npm install && npm run build
 
 # ضبط صلاحيات التخزين
 RUN chmod -R 777 storage bootstrap/cache
